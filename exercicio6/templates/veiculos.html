@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veículos Cadastrados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Veículos Cadastrados</h2>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tipo de Veículo</th>
+                    <th>Nome</th>
+                    <th>Ano</th>
+                    <th>Cilindrada</th>
+                    <th>Combustível</th>
+                    <th>Valor da Diária (R$)</th>
+                </tr>
+            </thead>
+            <tbody id="veiculosTable">
+            </tbody>
+        </table>
+        <div class="d-flex gap-2">
+            <a href="formulario.html" class="btn btn-primary">Cadastrar Novo Veículo</a>
+            <a href="cadastrar_aluguel.html" class="btn btn-primary">Cadastrar Aluguel</a>
+            <a href="alugueis.html" class="btn btn-secondary">Alugueis Cadastrados</a>
+        </div>
+    </div>
+
+    <script>
+        // Simulando a obtenção dos dados do localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const veiculosTable = document.getElementById('veiculosTable');
+            const veiculosCadastrados = JSON.parse(localStorage.getItem('veiculos')) || [];
+
+            veiculosCadastrados.forEach(veiculo => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${veiculo.tipo}</td>
+                    <td>${veiculo.nome}</td>
+                    <td>${veiculo.ano}</td>
+                    <td>${veiculo.cilindrada ? veiculo.cilindrada : '-'}</td>
+                    <td>${veiculo.combustivel}</td>
+                    <td>${veiculo.valor}</td>
+                `;
+                veiculosTable.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>
